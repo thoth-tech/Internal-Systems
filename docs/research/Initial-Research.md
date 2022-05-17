@@ -1,5 +1,7 @@
 # Initial Research for Internal Systems 
+_As we are beggining our work on Internal systems we need to generate some ideas for the areas that we can work on and the tools that we might use going forward in our project. This could include different coding language that we are farmiliar with and tools we have used. Different static site generators that exitst and how we can host out site once generated. From here we should also get an idea for the how we might manage Quality Assurance side of the product and mainting its quality._
 ## Website Technologies
+
 #
 <br />
 
