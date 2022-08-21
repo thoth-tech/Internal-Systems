@@ -1,14 +1,30 @@
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/gatsby-config/
+ */
+
+console.log(__dirname)
 module.exports = {
-    siteMetadata: {
-      title: `internal-systems`,
-      siteUrl: `https://www.yourdomain.tld`
-    },
-    plugins: ["gatsby-plugin-mdx", {
-      resolve: 'gatsby-source-filesystem',
+  /* Your site config here */
+  plugins: [
+    "gatsby-transformer-remark",
+    {
+      resolve: `gatsby-source-filesystem`,
       options: {
-        "name": "pages",
-        "path": "./src/pages/"
+        name: `placeholder`,
+        path: `${__dirname}/src/`,
       },
-      __key: "pages"
-    }]
-  };
+    },
+    {
+      resolve: `gatsby-source-git`,
+      options: {
+        name: `repo-one`,
+        remote: `https://github.com/thoth-tech/handbook.git`,
+        branch: `main`,
+        // Only import the docs folder from a codebase.
+        patterns: `docs/**`,
+      },
+    },
+  ],
+}
