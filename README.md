@@ -50,7 +50,15 @@ Please follow the instruction to setup your development environment in your loca
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)._
 
-    Save your changes and the browser will update in real time!
+    Always create a new branch when developping and name it by the functionality such `git branch development/adding-search-bar`
+
+    Checkout to the new branch `git checkout development/adding-search-bar`
+
+    Create multiple commits throughout the development process. Consider creating Draft PRs, which are pull requests that are opened at the beginning or during the coding stage in order to start and collect feedback from other developers. 
+
+    Once you are done and you're ready to get feedback on your pull request, you can mark your draft pull request as ready for review. Marking a pull request as ready for review will request reviews from any code owners. **[Read more about Changing the stages of a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request)**
+
+    
 
 ## 🧐 What's inside?
 
