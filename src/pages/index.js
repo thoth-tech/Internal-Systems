@@ -23,7 +23,27 @@ export default function Home() {
         </Box>
       </Box>
 
-      
+      <Box sx={{
+        mt: "5rem",
+        px: "2rem",
+      }}>
+        {/* Top Heading */}
+        <Box component={'h1'} sx={{
+          fontSize: '3rem'
+        }}>
+          Thoth Tech
+        </Box>
+        <Box sx={{
+          fontSize: '1.2rem',
+        }}>
+          One step for all projects
+        </Box>
+        <Box sx={{
+          mt: "2rem"
+        }}>
+          
+        </Box>
+      </Box>
 
     </Box>
   )
