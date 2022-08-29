@@ -41,7 +41,19 @@ export default function Home() {
         <Box sx={{
           mt: "2rem"
         }}>
-          
+        <Box component={Link} to={'/docs'} sx={{
+            background: "#000",
+            color: '#fff',
+            padding: '8px 1rem',
+            fontSize: '1.2rem',
+            textDecoration: "none",
+            borderRadius: '12px',
+            "&hover": {
+              background: "#000"
+            }
+          }} variant='contained'>
+            Explore Docs
+          </Box>
         </Box>
       </Box>
 
