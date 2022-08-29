@@ -8,7 +8,11 @@ console.log(__dirname)
 module.exports = {
   /* Your site config here */
   plugins: [
+    `gatsby-theme-material-ui`,
     "gatsby-transformer-remark",
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
