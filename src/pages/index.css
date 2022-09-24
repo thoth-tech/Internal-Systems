@@ -10,53 +10,66 @@
 }
 
 .navlink:hover {
-  background: white !important;
-  color: black !important;
-  transition: 0.3s !important;
+  background: white;
+  color: black;
+  transition: 0.3s;
 }
 
-.row1 {
-  margin-top: 10% !important;
+.col {
+  margin: 10%;
 }
 
-.col1 {
-  margin-top: 5% !important;
-  margin-left: 10%;
+.test {
+  margin-top: 10%;
 }
 
-.link {
+.heading {
+  margin: 10px 30px;
+  padding: 35px;
+}
+
+.docs {
+  margin: 10px 30px;
+  padding: 35px;
+  color: rgb(255, 248, 248);
+  background-color: #655d58;
+  text-align: center;
+  border-radius: 25px;
+}
+
+/* .link {
   color: white;
   text-decoration: none;
   margin-top: 12px;
-  margin-left: 5px !important;
+  margin-left: 5px ;
 }
 
 .link:hover {
-  background: white !important;
-  color: black !important;
-  transition: 0.3s !important;
-}
+  background: white ;
+  color: rgb(255, 255, 255) ;
+  transition: 0.3s ;
+} */
 
-.btn {
+/* .btn {
   margin-top: 12px;
   margin-left: 20px;
 }
 
 .btn:hover {
-  background: white !important;
-  color: black !important;
-  transition: 0.3s !important;
-}
-
+  background: white ;
+  color: black ;
+  transition: 0.3s ;
+} */
+/* 
 .docs {
-  color: black !important;
-  text-decoration: none !important;
+  color: black ;
+  text-decoration: none ;
   margin-top: 12px;
-  margin-left: 5px !important;
+  margin-left: 5px ;
 }
 
 .docs:hover {
-  background: black !important;
-  color: white !important;
-  transition: 0.3s !important;
-}
+  background: black ;
+  color: white ;
+  transition: 0.3s ;
+} */
