@@ -3,7 +3,7 @@ import "./index.css"
 import Button from 'react-bootstrap/Button';
 import { Link } from "gatsby"
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { graphql } from "gatsby"
 export default function Docs({ data }) {
   const docs = data.allFile.nodes
   return (
