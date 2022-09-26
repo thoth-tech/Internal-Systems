@@ -1,0 +1,62 @@
+.navbar-color {
+  background-color: rgb(207, 207, 202);
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-color: black;
+}
+
+.brandimg {
+  margin-left: 10px;
+}
+
+.navlink:hover {
+  background: white !important;
+  color: black !important;
+  transition: 0.3s !important;
+}
+
+.row1 {
+  margin-top: 10% !important;
+}
+
+.col1 {
+  margin-top: 5% !important;
+  margin-left: 10%;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  margin-top: 12px;
+  margin-left: 5px !important;
+}
+
+.link:hover {
+  background: white !important;
+  color: black !important;
+  transition: 0.3s !important;
+}
+
+.btn {
+  margin-top: 12px;
+  margin-left: 20px;
+}
+
+.btn:hover {
+  background: white !important;
+  color: black !important;
+  transition: 0.3s !important;
+}
+
+.docs {
+  color: black !important;
+  text-decoration: none !important;
+  margin-top: 12px;
+  margin-left: 5px !important;
+}
+
+.docs:hover {
+  background: black !important;
+  color: white !important;
+  transition: 0.3s !important;
+}

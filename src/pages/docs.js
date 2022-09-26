@@ -1,5 +1,8 @@
-import { graphql, Link } from "gatsby"
 import React from "react"
+import "./index.css"
+import Button from 'react-bootstrap/Button';
+import { Link } from "gatsby"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Docs({ data }) {
   const docs = data.allFile.nodes
@@ -8,13 +11,17 @@ export default function Docs({ data }) {
       <h1>List all the docs</h1>
       <nav>
         {docs.map(doc => (
-          <Link
-            key={doc.id}
-            to={`/${doc.relativePath}`}
-            style={{ display: "block" }}
-          >
-            {doc.relativePath}
-          </Link>
+
+          <Button className="docs" variant="light">
+
+            <Link key={doc.id} to={`/${doc.relativePath}`}
+              style={{ display: "block" }} >
+
+              {doc.relativePath}
+              
+            </Link>
+
+          </Button>
         ))}
       </nav>
     </div>
