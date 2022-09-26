@@ -57,7 +57,7 @@ function Home() {
             
             <Button className="btn" variant="dark">
               <Box className="link" component={Link} to={'/docs'} variant='contained'>
-                Get Started
+                Explore now
               </Box>
             </Button>
             
