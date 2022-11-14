@@ -2,7 +2,6 @@ import { Box } from "@mui/material"
 import React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
-import LogoImg from '../assets/logo.svg'
 
 export default function Home() {
   return (
@@ -12,7 +11,7 @@ export default function Home() {
     }}>
       {/* Top Header */}
       <Box sx={{ display: 'flex', gridGap: '1rem', pt: '1.5rem' }}>
-        <StaticImage width={60} src={'../assets/logo.png'} />
+        <StaticImage width={60} src={'../assets/logo.png'} alt='logo' />
         <Box component='header' sx={{
           fontWeight: 'bold',
           fontSize: "2.2rem",
