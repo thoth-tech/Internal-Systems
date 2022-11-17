@@ -1,9 +1,19 @@
 import { Box } from "@mui/material"
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 export default function Home() {
+  let input = ""
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate("/search-results", {state: {input: input}})
+  }
+
+  const getInput = (e) => {
+    input = e.target.value
+  }
+
   return (
     <Box sx={{
       maxWidth: "1200px",
@@ -55,7 +65,11 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-
+      <form onSubmit={handleSubmit}>
+        <br />
+        <label htmlFor="Search">Enter your search here</label>
+        <input placeholder="Enter your search here" onChange={getInput} ref={ref => ref && ref.focus()}/>         
+      </form>
     </Box>
   )
 }
