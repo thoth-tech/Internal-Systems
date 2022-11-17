@@ -8,7 +8,7 @@ class Search extends Component {
     search: {},
     searchResults: [],
     isLoading: true,
-    searchQuery: this.props.input || "",
+    searchQuery: "",
   }
 
   async componentDidMount() {
@@ -47,9 +47,12 @@ class Search extends Component {
   render = () => {
     const { searchResults, searchQuery, search, isLoading } = this.state
     let queryResults = searchResults
+    let queryValue = searchQuery
 
-    if (Object.keys(search).length > 0 && isLoading)
+    if (Object.keys(search).length > 0 && isLoading) {
       queryResults = search.search(this.props.input)
+      queryValue = this.props.input
+    }
 
     return (
       <div>
@@ -57,27 +60,24 @@ class Search extends Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="Search">Enter your search here</label>
           <input
-            value={searchQuery}
+            value={queryValue}
             onChange={this.searchData}
             ref={ref => ref && ref.focus()}
             placeholder="Enter your search here"
           />
         </form>
         Number of results: {queryResults.length}
-        <hr/>
-        
+        <hr />
         {queryResults.map(item => {
           return (
             <div key={`row_${item.id}`}>
               <Link to={`/${item.relativePath}`}>{item.title}</Link>
-              <br/>
+              <br />
               <label>{item.relativePath}</label>
               <hr />
             </div>
           )
         })}
-
-        
       </div>
     )
   }
