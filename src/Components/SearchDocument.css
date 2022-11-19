@@ -1,0 +1,15 @@
+.highlight {
+  background-color: yellow;
+}
+
+.selected {
+  background-color: orange;
+}
+
+.search-bar {
+  background-color: #b2c2bf;
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  text-align: center;
+}
