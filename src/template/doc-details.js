@@ -1,12 +1,9 @@
 import { graphql } from "gatsby"
 import React from "react"
+import SearchDocument from "../Components/SearchDocument"
 
 export default function DocDetails({ data }) {
-  return (
-    <div>
-      <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}></div>
-    </div>
-  )
+  return <SearchDocument data={data} />
 }
 
 export const query = graphql`
