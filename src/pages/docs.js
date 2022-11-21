@@ -1,23 +1,34 @@
-import { graphql, Link } from "gatsby"
 import React from "react"
+import { graphql } from "gatsby"
+import "./index.css"
+import { Link } from "gatsby"
+import "bootstrap/dist/css/bootstrap.min.css"
+import Grid from "@mui/material/Grid"
+import NavBar from "../Components/NavBar"
+import Footer from "../Components/Footer"
 
 export default function Docs({ data }) {
   const docs = data.allFile.nodes
   return (
-    <div>
-      <h1>List all the docs</h1>
-      <nav>
+    <>
+      <NavBar />
+      <div className="heading">
+        <h1>List all the docs</h1>
+      </div>
+      <Grid container spacing={4}>
         {docs.map(doc => (
-          <Link
-            key={doc.id}
-            to={`/${doc.relativePath}`}
-            style={{ display: "block" }}
-          >
-            {doc.relativePath}
-          </Link>
+          <Grid key={doc.id} item xs={4}>
+            <Link
+              to={`/${doc.relativePath}`}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="docs">{doc.relativePath}</div>
+            </Link>
+          </Grid>
         ))}
-      </nav>
-    </div>
+      </Grid>
+      <Footer />
+    </>
   )
 }
 
