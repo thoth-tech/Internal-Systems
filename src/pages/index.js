@@ -1,75 +1,111 @@
-import { Box } from "@mui/material"
+// import { Box } from "@mui/material"
 import React from "react"
-import { Link, navigate } from "gatsby"
+import "./index.css"
+import Button from "react-bootstrap/Button"
+// import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import Container from "react-bootstrap/Container"
+import Nav from "react-bootstrap/Nav"
+import Navbar from "react-bootstrap/Navbar"
+import "bootstrap/dist/css/bootstrap.min.css"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+// import GitHubIcon from "@mui/icons-material/GitHub"
+// import { CFooter } from "@coreui/react"
+// import { CLink } from "@coreui/react"
 
-export default function Home() {
-  let input = ""
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate("/search-results", {state: {input: input}})
-  }
+// import React from 'react';
+import { MDBFooter} from 'mdb-react-ui-kit';
 
-  const getInput = (e) => {
-    input = e.target.value
-  }
-
+function Home() {
   return (
-    <Box sx={{
-      maxWidth: "1200px",
-      mx: 'auto',
-    }}>
-      {/* Top Header */}
-      <Box sx={{ display: 'flex', gridGap: '1rem', pt: '1.5rem' }}>
-        <StaticImage width={60} src={'../assets/logo.png'} alt='logo' />
-        <Box component='header' sx={{
-          fontWeight: 'bold',
-          fontSize: "2.2rem",
-          fontFamily: "sans-serif",
-          px: '1rem'
-        }}>
-          Capstone
-        </Box>
-      </Box>
+    <Container>
+      <Navbar className="navbar-color" bg="grey" expand="lg">
+        <Navbar.Brand href="/">
+          <StaticImage
+            className="brandimg"
+            width={40}
+            src={"../assets/logo.png"}
+          />
+        </Navbar.Brand>
+        <Navbar.Brand href="#home">Capstone</Navbar.Brand>
 
-      <Box sx={{
-        mt: "5rem",
-        px: "2rem",
-      }}>
-        {/* Top Heading */}
-        <Box component={'h1'} sx={{
-          fontSize: '3rem'
-        }}>
-          Thoth Tech
-        </Box>
-        <Box sx={{
-          fontSize: '1.2rem',
-        }}>
-          One step for all projects
-        </Box>
-        <Box sx={{
-          mt: "2rem"
-        }}>
-        <Box component={Link} to={'/docs'} sx={{
-            background: "#000",
-            color: '#fff',
-            padding: '8px 1rem',
-            fontSize: '1.2rem',
-            textDecoration: "none",
-            borderRadius: '12px',
-            "&hover": {
-              background: "#000"
-            }
-          }} variant='contained'>
-            Explore Docs
-          </Box>
-        </Box>
-      </Box>
-      <form onSubmit={handleSubmit}>
-        <br />
-        <label htmlFor="Search">Enter your search here</label>
-        <input placeholder="Enter your search here" onChange={getInput} ref={ref => ref && ref.focus()}/>         
-      </form>
-    </Box>
-  )
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-end" style={{ width: "100%" }}>
+            <Nav.Link>
+              <Button className="navlink" href="#home" variant="outline-dark">
+                Home
+              </Button>
+            </Nav.Link>
+            <Nav.Link>
+              <Button
+                className="navlink"
+                href="#products"
+                variant="outline-dark"
+              >
+                Products
+              </Button>
+            </Nav.Link>
+            <Nav.Link>
+              <Button
+                className="navlink"
+                href="#getstarted"
+                variant="outline-dark"
+              >
+                Get Started
+              </Button>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <div className="test">
+        <Row className="row">
+          <Col className="col">
+            <div className="block1">
+              <h1 className="heading">Thoth Tech</h1>
+              <br></br>
+              <p className="para">One stop for all projects</p>
+
+              <a href="/docs">
+                <Button className="btn" variant="outline-dark">
+                  Explore Now
+                </Button>
+              </a>
+            </div>
+          </Col>
+          <Col className="col">
+            <StaticImage width={450} src={"../assets/capstone.png"} />
+          </Col>
+        </Row>
+      </div>
+      {/* <CFooter
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div>
+          <CLink href="https://coreui.io">Thoth Tech</CLink>
+          <span> &copy; 2022</span>
+        </div>
+      </CFooter> */}
+
+
+    <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
+      
+
+      <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+        © 2022 Copyright: 
+        <a className='text-reset fw-bold'>
+           Thoth Tech
+        </a>
+      </div>
+    </MDBFooter>
+
+    </Container>
+  );
 }
+export default Home
