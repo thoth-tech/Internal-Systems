@@ -6,12 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Grid from "@mui/material/Grid"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
+import UploadDocument from "../Components/UploadDocument"
 
 export default function Docs({ data }) {
   const docs = data.allFile.nodes
   return (
     <>
-      <NavBar />
+      <NavBar /> <UploadDocument />
       <div className="heading">
         <h1>List all the docs</h1>
       </div>
