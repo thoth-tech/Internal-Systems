@@ -2,6 +2,8 @@ const express = require("express")
 const multer = require("multer")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
+// const simpleGit = require("simple-git")
+const shelljs = require("shelljs")
 const app = express()
 app.use(
   bodyParser.urlencoded({
@@ -10,39 +12,18 @@ app.use(
 )
 const port = process.env.PORT || 5000
 
-const upload = multer.diskStorage({
-  destination: "uploads",
-  filename: function (req, file, cb) {
-    cb(null, file.originalname + ".md")
-  },
-})
-
-const fileSchema = new mongoose.Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  name: {
-    type: String,
-    required: [true, "Uploaded file must have a name"],
-  },
-})
-
-const File = mongoose.model("File", fileSchema)
+const upload = multer({ dest: "uploads" })
 
 app.post("/upload", upload.single("file"), async (req, res) => {
   console.log(req.file)
-  try {
-    const newFile = await File.create({
-      name: req.file.originalname,
-    })
-    res.status(200).json({
-      status: "success",
-      message: "File created",
-    })
-  } catch (err) {
-    res.json({ err })
-  }
+  shelljs.cd(
+    `C:\\Users\\RT\\Documents\\Internal-systems-offical\\Internal-Systems`
+  )
+  let test = shelljs.exec(`git add src/server/uploads`)
+  console.log(test)
+  shelljs.exec(`git commit -m "Uploaded file" `)
+  shelljs.exec(`git push origin main`)
+  shelljs.cd(`src\\server`)
 })
 
 app.listen(port, () => console.log("server started on port 5000"))
