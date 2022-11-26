@@ -12,7 +12,7 @@ export default function Docs({ data }) {
   const docs = data.allFile.nodes
   return (
     <>
-      <NavBar /> <UploadDocument />
+      <NavBar />
       <div className="heading">
         <h1>List all the docs</h1>
       </div>

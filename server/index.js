@@ -7,7 +7,8 @@ const fs = require("fs")
 const base64 = require("base-64")
 const { Octokit } = require("@octokit/rest")
 require("dotenv").config()
-
+const { promisify } = require("util")
+const unlinkAsync = promisify(fs.unlink)
 const token = process.env.TOKEN
 const octokit = new Octokit({
   auth: token,
@@ -56,6 +57,8 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+
+  await unlinkAsync(req.file.path)
 })
 
 app.listen(port, () => console.log("server started on port 5000"))
