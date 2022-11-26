@@ -1,24 +1,31 @@
 const express = require("express")
 const multer = require("multer")
 const bodyParser = require("body-parser")
-const mongoose = require("mongoose")
-const shelljs = require("shelljs")
 const path = require("path")
 const app = express()
+const fs = require("fs")
+const base64 = require("base-64")
+const { Octokit } = require("@octokit/rest")
+require("dotenv").config()
+
+const token = process.env.TOKEN
+const octokit = new Octokit({
+  auth: token,
+})
 
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 )
-const port = process.env.PORT || 5000
+const port = 5000
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads")
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname)
+    cb(null, file.originalname)
   },
 })
 
@@ -34,9 +41,28 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  shelljs.exec(`git add uploads`)
-  shelljs.exec(`git commit -m "Uploaded file" `)
-  shelljs.exec(`git push origin main`)
+  const testFile = fs.readFileSync("uploads\\/" + req.file.filename).toString()
+  const content = base64.encode(testFile)
+  const fileName = req.file.originalname
+
+  try {
+    await octokit.request(
+      "PUT /repos/Rtam22/Internal-Systems/contents/server/uploads/" + fileName,
+      {
+        owner: "Rtam22",
+        repo: "Internal-Systems",
+        path: "PATH",
+        message: "uploaded file",
+        committer: {
+          name: "Rtam22",
+          email: "regantam92@gmail.com",
+        },
+        content: content,
+      }
+    )
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 app.listen(port, () => console.log("server started on port 5000"))

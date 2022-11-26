@@ -1,5 +1,5 @@
 // import { Box } from "@mui/material"
-import React, { useState } from "react"
+import React from "react"
 import "./index.css"
 import Button from "react-bootstrap/Button"
 import { StaticImage } from "gatsby-plugin-image"

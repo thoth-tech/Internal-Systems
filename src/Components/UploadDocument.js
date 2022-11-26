@@ -5,8 +5,10 @@ function UploadDocument() {
   const [file, setFile] = useState()
 
   const send = () => {
+    console.log(file)
     const data = new FormData()
     data.append("file", file)
+    console.log(data)
     axios
       .post("http://localhost:5000/upload", data)
       .then(res => console.log(res))
