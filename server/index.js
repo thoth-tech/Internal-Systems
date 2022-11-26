@@ -46,20 +46,13 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   const fileName = req.file.originalname
 
   try {
-    await octokit.request(
-      "PUT /repos/Rtam22/Internal-Systems/contents/server/uploads/" + fileName,
-      {
-        owner: "Rtam22",
-        repo: "Internal-Systems",
-        path: "PATH",
-        message: "uploaded file",
-        committer: {
-          name: "Rtam22",
-          email: "regantam92@gmail.com",
-        },
-        content: content,
-      }
-    )
+    await octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", {
+      owner: "YOUR_ACCOUNT_NAME",
+      repo: "YOUR_REPOSITORY",
+      path: "server/uploads/" + fileName,
+      message: "uploaded file",
+      content: content,
+    })
   } catch (err) {
     console.log(err)
   }
