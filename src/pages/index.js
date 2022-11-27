@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
+import UploadDocument from "../Components/UploadDocument"
 
 function Home() {
   return (
@@ -24,6 +25,7 @@ function Home() {
               <Button href="/docs" className="btn" variant="outline-dark">
                 Explore Now
               </Button>
+              <UploadDocument />
             </div>
           </Col>
           <Col className="col">
