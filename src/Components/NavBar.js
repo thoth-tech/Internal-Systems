@@ -90,6 +90,13 @@ const NavBar = () => {
           >
             Get Started
           </Nav.Link>
+          <Nav.Link
+            className="navlink"
+            variant="outline-dark"
+            href="/contributors"
+          >
+            Contributors
+          </Nav.Link>
           <Search>
             <form onSubmit={handleSubmit}>
               <SearchIconWrapper>
