@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
@@ -9,6 +9,8 @@ import { navigate } from "gatsby"
 import "../pages/index.css"
 
 const NavBar = () => {
+  const windowRef = useRef("")
+  const windowHref = windowRef.current
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -51,8 +53,6 @@ const NavBar = () => {
     },
   }))
 
-  let input = ""
-
   const handleSubmit = e => {
     e.preventDefault()
     navigate("/search-results", { state: { input: input } })
@@ -61,6 +61,30 @@ const NavBar = () => {
   const getInput = e => {
     input = e.target.value
   }
+
+  const searchContent = windowHref.match(/search-results/) ? (
+    ""
+  ) : (
+    <Search>
+      <form onSubmit={handleSubmit}>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+          onChange={getInput}
+        />
+      </form>
+    </Search>
+  )
+
+  useEffect(() => {
+    if (window) windowRef.current = window.location.href
+  }, [])
+
+  let input = ""
 
   return (
     <Navbar className="navbar-color" bg="grey" expand="lg">
@@ -72,12 +96,12 @@ const NavBar = () => {
           alt="logo"
         />
       </Navbar.Brand>
-      <Navbar.Brand href="#home">Capstone</Navbar.Brand>
+      <Navbar.Brand href="/">Capstone</Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="justify-content-end" style={{ width: "100%" }}>
-          <Nav.Link className="navlink" href="#home" variant="outline-dark">
+          <Nav.Link className="navlink" href="/" variant="outline-dark">
             Home
           </Nav.Link>
           <Nav.Link className="navlink" href="#products" variant="outline-dark">
@@ -97,19 +121,7 @@ const NavBar = () => {
           >
             Contributors
           </Nav.Link>
-          <Search>
-            <form onSubmit={handleSubmit}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={getInput}
-              />
-            </form>
-          </Search>
+          {searchContent}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
