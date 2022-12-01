@@ -1,44 +1,57 @@
-// import { Box } from "@mui/material"
 import React from "react"
-import "./index.css"
-import Button from "react-bootstrap/Button"
-import { StaticImage } from "gatsby-plugin-image"
-import Container from "react-bootstrap/Container"
-import "bootstrap/dist/css/bootstrap.min.css"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
 import UploadDocument from "../Components/UploadDocument"
+import { Box, Divider, Grid, Typography } from "@mui/material"
+import Button from "react-bootstrap/Button"
+import capstone from "../assets/capstone.png"
 
 function Home() {
   return (
-    <Container>
+    <>
       <NavBar />
-      <div className="test">
-        <Row className="row">
-          <Col className="col">
-            <div className="block1">
-              <h1 className="heading">Thoth Tech</h1>
-              <br></br>
-              <p className="para">One stop for all projects</p>
-              <Button href="/docs" className="btn" variant="outline-dark">
-                Explore Now
-              </Button>
-              <UploadDocument />
-            </div>
-          </Col>
-          <Col className="col">
-            <StaticImage
-              width={450}
-              src={"../assets/capstone.png"}
-              alt="capstone"
-            />
-          </Col>
-        </Row>
-      </div>
-      <Footer />
-    </Container>
+      <Grid
+        container
+        display="flex"
+        spacing={2}
+        alignItems="center"
+        sx={{ minHeight: "80vh" }}
+      >
+        <Grid item sm={12} md={4}>
+          <Box sx={{ width: "100%", pl: "5vw" }}>
+            <Typography variant="h3" gutterBottom>
+              Thoth Tech
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              One stop for all project
+            </Typography>
+
+            <Button href="/docs" className="btn" variant="outline-dark">
+              Explore Now
+            </Button>
+            <Divider sx={{ my: 3 }} />
+            <UploadDocument />
+          </Box>
+        </Grid>
+        <Grid item sm={12} md={8} textAlign="center">
+          <Box
+            component="img"
+            alt="capstone"
+            src={capstone}
+            sx={{ maxWidth: "90%" }}
+          />
+        </Grid>
+      </Grid>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+        }}
+      >
+        <Footer />
+      </Box>
+    </>
   )
 }
 export default Home
