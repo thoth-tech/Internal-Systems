@@ -121,6 +121,9 @@ const NavBar = () => {
           >
             Contributors
           </Nav.Link>
+          <Nav.Link className="navlink" variant="outline-dark" href="/upload">
+            Upload
+          </Nav.Link>
           {searchContent}
         </Nav>
       </Navbar.Collapse>

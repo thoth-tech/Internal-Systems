@@ -14,6 +14,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search"
 import { IconButton } from "gatsby-theme-material-ui"
 import { Container } from "@mui/system"
+import Footer from "./Footer"
 
 class Search extends Component {
   state = {
@@ -68,7 +69,7 @@ class Search extends Component {
     }
 
     return (
-      <>
+      <Container maxWidth="xl">
         <NavBar />
         <Box
           sx={{
@@ -136,7 +137,7 @@ class Search extends Component {
             </List>
           </Box>
         </Container>
-      </>
+      </Container>
     )
   }
 }
