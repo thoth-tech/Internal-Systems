@@ -1,14 +1,14 @@
 import React from "react"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
-import UploadDocument from "../Components/UploadDocument"
 import { Box, Divider, Grid, Typography } from "@mui/material"
 import Button from "react-bootstrap/Button"
 import capstone from "../assets/capstone.png"
+import { Container } from "@mui/system"
 
 function Home() {
   return (
-    <>
+    <Container maxWidth="xl">
       <NavBar />
       <Grid
         container
@@ -30,7 +30,6 @@ function Home() {
               Explore Now
             </Button>
             <Divider sx={{ my: 3 }} />
-            <UploadDocument />
           </Box>
         </Grid>
         <Grid item sm={12} md={8} textAlign="center">
@@ -44,14 +43,12 @@ function Home() {
       </Grid>
       <Box
         sx={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
+          mt: "6vmax",
         }}
       >
         <Footer />
       </Box>
-    </>
+    </Container>
   )
 }
 export default Home

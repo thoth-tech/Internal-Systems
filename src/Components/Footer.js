@@ -3,7 +3,11 @@ import { MDBFooter } from "mdb-react-ui-kit"
 
 const Footer = () => {
   return (
-    <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
+    <MDBFooter
+      bgColor="light"
+      className="text-center text-lg-start text-muted"
+      style={{ marginTop: "1%" }}
+    >
       <div
         className="text-center p-4"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}

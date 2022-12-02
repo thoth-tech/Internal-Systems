@@ -1,6 +1,6 @@
 import {
   Avatar,
-  CircularProgress,
+  Container,
   Divider,
   Link,
   List,
@@ -13,6 +13,8 @@ import {
 import { Box } from "@mui/system"
 import React, { useState } from "react"
 import { useEffect } from "react"
+import Footer from "../Components/Footer"
+import LoadingAnimation from "../Components/LoadingAnimation"
 import NavBar from "../Components/NavBar"
 
 const Contributors = () => {
@@ -71,25 +73,8 @@ const Contributors = () => {
     setSortByDate(prevValue => !prevValue)
   }
 
-  const loadingAnimation = (
-    <Box
-      sx={{
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        position: "absolute",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <CircularProgress />
-    </Box>
-  )
-
   const commitsContent = !commits ? (
-    loadingAnimation
+    <LoadingAnimation />
   ) : (
     <List
       sx={{
@@ -116,7 +101,7 @@ const Contributors = () => {
                 <ListItemAvatar>
                   <Avatar alt="avatar" src={item.avatar} />
                 </ListItemAvatar>
-                <Box>
+                <Box sx={{ overflow: "hidden" }}>
                   <Typography color="text.primary" variant="subtitle1">
                     {item.name} (
                     <Link underline="hover" href={item.email}>
@@ -125,7 +110,7 @@ const Contributors = () => {
                     )
                   </Typography>
 
-                  <Typography color="text.secondary" variant="body2">
+                  <Typography noWrap color="text.secondary" variant="body2">
                     Date: {item.date}
                     <br />
                     Message: {item.message}
@@ -183,7 +168,7 @@ const Contributors = () => {
   }, [])
 
   return (
-    <>
+    <Container maxWidth="xl">
       <NavBar />
       <Box display="flex" justifyContent="center" sx={{ my: 2 }}>
         {commitsContent}
@@ -211,7 +196,8 @@ const Contributors = () => {
           {sortBy}
         </Stack>
       </Box>
-    </>
+      <Footer />
+    </Container>
   )
 }
 
