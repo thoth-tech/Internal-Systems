@@ -14,14 +14,20 @@ export default function Docs({ data }) {
     <>
       <NavBar />
       <div className="heading">
-        <h1>List all the docs</h1>
+        <h1 style={{
+          textAlign:"center",
+          fontSize:"55px"
+        }}
+        >List all the docs</h1>
       </div>
       <Grid container spacing={4}>
         {docs.map(doc => (
           <Grid key={doc.id} item xs={4}>
-            <Link
-              to={`/${doc.relativePath}`}
-              style={{ textDecoration: "none" }}
+          <Link
+            to={`/${doc.relativePath}`}
+            style={{ 
+              textDecoration: "none",
+            }}
             >
               <div className="docs">{doc.relativePath}</div>
             </Link>
