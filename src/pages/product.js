@@ -27,7 +27,7 @@ function Home() {
         <Row className="row">
           <Col className="col">
             <div className="block1">
-              <h2 className="heading">Ontrack</h2>
+              <a href = "/ontrack"><h2 className="heading">Ontrack</h2></a>
               <br></br>
             </div>
           </Col>
@@ -43,7 +43,7 @@ function Home() {
         <Row className="row">
           <Col className="col">
             <div className="block1">
-              <h2 className="heading">Splashkit</h2>
+              <a href="/splashkit"><h2 className="heading">Splashkit</h2></a>
               <br></br>
             </div>
           </Col>
@@ -51,14 +51,14 @@ function Home() {
             <StaticImage
               width={220}
               src={"../assets/splashkit.png"}
-              alt="capstone"
+              alt="capstone" href="/"
             /></Col>
             
         </Row>
         <Row className="row">
           <Col className="col">
             <div className="block1">
-              <h2 className="heading">Dreambig</h2>
+              <a href ="/dreambig"><h2 className="heading">Dreambig</h2></a>
               <br></br>
             </div>
           </Col>

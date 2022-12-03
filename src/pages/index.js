@@ -23,11 +23,13 @@ function Home() {
               Thoth Tech
             </Typography>
             <Typography variant="body2" gutterBottom>
-              One stop for all project
+              Thoth Tech is founded on February 21st, 2022. Our mission is to build, operate and deploy world class education technologies. We are proud to create tools that enhance education outcomes by empowering students, connecting them with tutors and facilitating personalised learning experiences.
             </Typography>
-
+            <Button href="https://github.com/thoth-tech" className="btn" variant="outline-dark">
+              Github 
+            </Button>
             <Button href="/docs" className="btn" variant="outline-dark">
-              Explore Now
+              Company Handbook
             </Button>
             <Divider sx={{ my: 3 }} />
             <UploadDocument />
