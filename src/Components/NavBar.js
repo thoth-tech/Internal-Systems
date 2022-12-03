@@ -104,7 +104,7 @@ const NavBar = () => {
           <Nav.Link className="navlink" href="/" variant="outline-dark">
             Home
           </Nav.Link>
-          <Nav.Link className="navlink" href="#products" variant="outline-dark">
+          <Nav.Link className="navlink" href="/product" variant="outline-dark">
             Products
           </Nav.Link>
           <Nav.Link
