@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import { IconButton } from "gatsby-theme-material-ui"
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import { Container } from "@mui/system"
 
 class SearchDocument extends Component {
   state = {
@@ -118,7 +119,7 @@ class SearchDocument extends Component {
     }
 
     return (
-      <>
+      <Container maxWidth="xl">
         <NavBar />
         <Box
           sx={{
@@ -139,6 +140,7 @@ class SearchDocument extends Component {
               alignItems: "center",
               width: "40%",
               minWidth: "300px",
+              maxWidth: "500px",
             }}
             onSubmit={this.handleSubmit}
           >
@@ -172,7 +174,7 @@ class SearchDocument extends Component {
             }}
           ></div>
         </div>
-      </>
+      </Container>
     )
   }
 }
