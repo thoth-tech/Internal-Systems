@@ -4,16 +4,11 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const app = express()
 const fs = require("fs")
-const { Octokit } = require("@octokit/rest")
-require("dotenv").config()
 const { promisify } = require("util")
 const { response } = require("express")
 const { nextTick } = require("process")
+const gitUpload = require("./gitUpload")
 const unlinkAsync = promisify(fs.unlink)
-const token = process.env.TOKEN
-const octokit = new Octokit({
-  auth: token,
-})
 
 app.use(
   bodyParser.urlencoded({
@@ -42,55 +37,23 @@ const upload = multer({
   },
 })
 
-async function checkIfExist(fileName) {
-  try {
-    const result = await octokit.repos.getContent({
-      owner: "Rtam22",
-      repo: "Uploadtest",
-      path: "uploads/" + fileName,
-    })
-    if (result.data.name) {
-      return true
-    }
-  } catch (err) {
-    return false
-  }
-}
-
-async function pushToGithub(content, fileName) {
-  try {
-    await octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", {
-      owner: "Rtam22",
-      repo: "Uploadtest",
-      path: "uploads/" + fileName,
-      message: "uploaded file",
-      content: content,
-    })
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
-    const testFile = fs
-      .readFileSync("uploads\\/" + req.file.filename)
-      .toString()
-    const content = btoa(unescape(encodeURIComponent(testFile)))
+    const file = fs.readFileSync("uploads\\/" + req.file.filename).toString()
+    const content = btoa(unescape(encodeURIComponent(file)))
     const fileName = req.file.originalname
 
-    let fileCheck = await checkIfExist(fileName)
+    let fileCheck = await gitUpload.checkIfExist(fileName)
     console.log(fileCheck)
     if (fileCheck) {
       console.log("File name already exists")
       res.status(500).json({ message: "File name already exists" })
     } else {
       console.log("Pushing file to github")
-      await pushToGithub(content, fileName)
+      await gitUpload.pushToGithub(content, fileName)
     }
   } catch (err) {
     console.log(err)
-    unlinkAsync(req.file.path)
   }
   unlinkAsync(req.file.path)
 })
