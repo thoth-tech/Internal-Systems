@@ -1,0 +1,19 @@
+.footer{
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding: 0.4%;
+    background-color: rgb(255, 255, 255);
+    font-size: smaller;
+}
+
+.p1{
+    word-spacing: 1px;
+    color: rgb(0, 0, 0);
+}
+
+.p1 a{
+    font-weight :bold;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
