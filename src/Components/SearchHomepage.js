@@ -14,7 +14,6 @@ import {
 import SearchIcon from "@mui/icons-material/Search"
 import { IconButton } from "gatsby-theme-material-ui"
 import { Container } from "@mui/system"
-import Footer from "./Footer"
 
 class Search extends Component {
   state = {

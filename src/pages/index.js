@@ -1,55 +1,77 @@
 import React from "react"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
-import { Box, Divider, Grid, Typography } from "@mui/material"
+import { Grid, Paper, Typography } from "@mui/material"
 import Button from "react-bootstrap/Button"
-import capstone from "../assets/capstone.png"
-import { Container } from "@mui/system"
+import { Container, Stack } from "@mui/system"
+import BGImage from "../assets/bg-image.png"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks"
 
 function Home() {
   return (
     <Container maxWidth="xl">
       <NavBar />
-      <Grid
-        container
-        display="flex"
-        spacing={2}
-        alignItems="center"
-        sx={{ minHeight: "80vh" }}
-      >
-        <Grid item sm={12} md={4}>
-          <Box sx={{ width: "100%", pl: "5vw" }}>
-            <Typography variant="h3" gutterBottom>
-              Thoth Tech
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              Thoth Tech is founded on February 21st, 2022. Our mission is to build, operate and deploy world class education technologies. We are proud to create tools that enhance education outcomes by empowering students, connecting them with tutors and facilitating personalised learning experiences.
-            </Typography>
-            <Button href="https://github.com/thoth-tech" className="btn" variant="outline-dark">
-              Github 
-            </Button>
-            <Button href="/docs" className="btn" variant="outline-dark">
-              Company Handbook
-            </Button>
-            <Divider sx={{ my: 3 }} />
-          </Box>
-        </Grid>
-        <Grid item sm={12} md={8} textAlign="center">
-          <Box
-            component="img"
-            alt="capstone"
-            src={capstone}
-            sx={{ maxWidth: "90%" }}
-          />
-        </Grid>
-      </Grid>
-      <Box
+      <Paper
         sx={{
-          mt: "6vmax",
+          backgroundImage: `url(${BGImage})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          minHeight: "90vh",
         }}
       >
-        <Footer />
-      </Box>
+        <Grid
+          container
+          display="flex"
+          spacing={2}
+          alignItems="center"
+          textAlign="center"
+          justifyContent="center"
+          sx={{ pt: "20vmin" }}
+        >
+          <Grid item xs={12}>
+            <Typography variant="h2" gutterBottom sx={{ fontWeight: 500 }}>
+              Thoth Tech
+            </Typography>
+          </Grid>
+          <Grid item xs={9} sm={5}>
+            <Typography variant="body1" gutterBottom>
+              Thoth Tech is founded on February 21st, 2022. Our mission is to
+              build, operate and deploy world class education technologies. We
+              are proud to create tools that enhance education outcomes by
+              empowering students, connecting them with tutors and facilitating
+              personalised learning experiences.
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Button
+                href="https://github.com/thoth-tech"
+                className="btn"
+                variant="dark"
+              >
+                <Stack direction="row" spacing={1}>
+                  <GitHubIcon />
+                  <div>GitHub</div>
+                </Stack>
+              </Button>
+              <Button href="/docs" className="btn" variant="outline-dark">
+                <Stack direction="row" spacing={1}>
+                  <LibraryBooksIcon />
+                  <div>Handbook</div>
+                </Stack>
+              </Button>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Footer />
     </Container>
   )
 }

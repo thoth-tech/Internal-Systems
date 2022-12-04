@@ -14,11 +14,12 @@ const NavBar = () => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.4),
     "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.6),
     },
     marginLeft: 0,
+    marginRight: 30,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -45,9 +46,9 @@ const NavBar = () => {
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("sm")]: {
-        width: "12ch",
+        width: "25ch",
         "&:focus": {
-          width: "20ch",
+          width: "30ch",
         },
       },
     },
@@ -70,7 +71,6 @@ const NavBar = () => {
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
@@ -100,7 +100,7 @@ const NavBar = () => {
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="justify-content-end" style={{ width: "100%" }}>
+        <Nav className="justify-content" style={{ width: "100%" }}>
           <Nav.Link className="navlink" href="/" variant="outline-dark">
             Home
           </Nav.Link>
@@ -124,8 +124,8 @@ const NavBar = () => {
           <Nav.Link className="navlink" variant="outline-dark" href="/upload">
             Upload
           </Nav.Link>
-          {searchContent}
         </Nav>
+        {searchContent}
       </Navbar.Collapse>
     </Navbar>
   )

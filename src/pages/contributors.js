@@ -93,39 +93,41 @@ const Contributors = () => {
         : !descending && !sortByDate
         ? alphabeticalCommits
         : reversedAlphabeticalCommits
-      ).map((item, index) => {
-        if (currentPage * rows > index && currentPage * rows - rows <= index)
-          return (
-            <Box key={item.id}>
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="avatar" src={item.avatar} />
-                </ListItemAvatar>
-                <Box sx={{ overflow: "hidden" }}>
-                  <Typography color="text.primary" variant="subtitle1">
-                    {item.name} (
-                    <Link underline="hover" href={item.email}>
-                      {item.username}
-                    </Link>
-                    )
-                  </Typography>
+      )
+        // eslint-disable-next-line
+        .map((item, index) => {
+          if (currentPage * rows > index && currentPage * rows - rows <= index)
+            return (
+              <Box key={item.id}>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="avatar" src={item.avatar} />
+                  </ListItemAvatar>
+                  <Box sx={{ overflow: "hidden" }}>
+                    <Typography color="text.primary" variant="subtitle1">
+                      {item.name} (
+                      <Link underline="hover" href={item.email}>
+                        {item.username}
+                      </Link>
+                      )
+                    </Typography>
 
-                  <Typography noWrap color="text.secondary" variant="body2">
-                    Date: {item.date}
-                    <br />
-                    Message: {item.message}
-                    <br />
-                    Commit:{" "}
-                    <Link underline="hover" href={item.commit}>
-                      {item.commit}
-                    </Link>
-                  </Typography>
-                </Box>
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </Box>
-          )
-      })}
+                    <Typography noWrap color="text.secondary" variant="body2">
+                      Date: {item.date}
+                      <br />
+                      Message: {item.message}
+                      <br />
+                      Commit:{" "}
+                      <Link underline="hover" href={item.commit}>
+                        {item.commit}
+                      </Link>
+                    </Typography>
+                  </Box>
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </Box>
+            )
+        })}
     </List>
   )
 

@@ -8,6 +8,7 @@ export default function SearchResults(props) {
   useEffect(() => {
     const state = props.location.state
     if (!!state) setInput(state.input)
+    // eslint-disable-next-line
   }, [])
 
   return <Search data={props.data} input={input} />
