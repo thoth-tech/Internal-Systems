@@ -13,7 +13,7 @@ function UploadDocument() {
       .post("http://localhost:5000/upload", data)
       .then(res => console.log(res))
       .catch(err => {
-        console.log(err.message)
+        console.log(err.response.data.message)
       })
   }
 
