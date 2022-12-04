@@ -12,7 +12,9 @@ function UploadDocument() {
     axios
       .post("http://localhost:5000/upload", data)
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
   return (
@@ -22,6 +24,7 @@ function UploadDocument() {
         <input
           type="file"
           id="file"
+          accept=".md"
           onChange={event => {
             const file = event.target.files[0]
             setFile(file)
