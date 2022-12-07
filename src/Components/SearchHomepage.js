@@ -14,10 +14,12 @@ import {
 import SearchIcon from "@mui/icons-material/Search"
 import { IconButton } from "gatsby-theme-material-ui"
 import { Container } from "@mui/system"
+import HtmlTooltip from "./HtmlToolTip"
+import ScrollTop from "./ScrollTop"
 
 class Search extends Component {
   state = {
-    docList: [...this.props.data.allFile.nodes],
+    docList: [...this.props.data.allMarkdownRemark.nodes],
     search: {},
     searchResults: [],
     isLoading: true,
@@ -26,8 +28,12 @@ class Search extends Component {
 
   async componentDidMount() {
     this.state.docList.forEach(el => {
-      el.keywords = el.relativePath.replace(/(\/|-|.md)/g, " ")
-      el.title = el.relativePath.match(/[^\/]+(?=.md)/g) // eslint-disable-line
+      const path = el.fileAbsolutePath.slice(
+        el.fileAbsolutePath.indexOf("gatsby-source-git") + 18
+      )
+      el.path = path
+      el.keywords = path.replace(/(\/|-|.md)/g, " ")
+      el.title = path.match(/[^\/]+(?=.md)/g) // eslint-disable-line
     })
     this.rebuildIndex()
   }
@@ -115,27 +121,42 @@ class Search extends Component {
             <List component="nav" aria-label="mailbox folders">
               {queryResults.map(item => {
                 return (
-                  <ListItem
-                    button
-                    divider
-                    key={`row_${item.id}`}
-                    onClick={() => navigate(`/${item.relativePath}`)}
-                    sx={{ pt: 3 }}
+                  <HtmlTooltip
+                    title={
+                      item.html ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: item.html,
+                          }}
+                        />
+                      ) : (
+                        <h5>No Preview</h5>
+                      )
+                    }
                   >
-                    <Box sx={{ flexDirection: "column" }}>
-                      <Typography color="info.main" variant="subtitle1" d>
-                        {`${item.title}`.toUpperCase()}
-                      </Typography>
-                      <Typography color="text.secondary" variant="body2" d>
-                        {item.relativePath}
-                      </Typography>
-                    </Box>
-                  </ListItem>
+                    <ListItem
+                      button
+                      divider
+                      key={`row_${item.id}`}
+                      onClick={() => navigate(`/${item.path}`)}
+                      sx={{ pt: 3 }}
+                    >
+                      <Box sx={{ flexDirection: "column" }}>
+                        <Typography color="info.main" variant="subtitle1" d>
+                          {`${item.title}`.toUpperCase()}
+                        </Typography>
+                        <Typography color="text.secondary" variant="body2" d>
+                          {item.path}
+                        </Typography>
+                      </Box>
+                    </ListItem>
+                  </HtmlTooltip>
                 )
               })}
             </List>
           </Box>
         </Container>
+        <ScrollTop />
       </Container>
     )
   }

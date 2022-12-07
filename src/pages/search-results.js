@@ -16,15 +16,11 @@ export default function SearchResults(props) {
 
 export const query = graphql`
   query SearchQueryHomepage {
-    allFile(
-      filter: {
-        sourceInstanceName: { ne: "placeholder" }
-        extension: { eq: "md" }
-      }
-    ) {
+    allMarkdownRemark {
       nodes {
-        relativePath
+        fileAbsolutePath
         id
+        html
       }
     }
   }
