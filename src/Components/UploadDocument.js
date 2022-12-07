@@ -10,7 +10,7 @@ function UploadDocument() {
     data.append("file", file)
     console.log(data)
     axios
-      .post("http://localhost:5000/upload", data)
+      .post("/upload", data)
       .then(res => console.log(res))
       .catch(err => {
         console.log(err.response.data.message)
@@ -18,7 +18,7 @@ function UploadDocument() {
   }
 
   return (
-    <form action="#" enctype="multipart/form-data">
+    <form action="#" encType="multipart/form-data">
       <div>
         <label htmlFor="fileUpload">File</label>
         <input
@@ -31,7 +31,9 @@ function UploadDocument() {
           }}
         />
       </div>
-      <button onClick={send}>Upload</button>
+      <button type="button" onClick={send}>
+        Upload
+      </button>
     </form>
   )
 }
