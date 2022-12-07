@@ -10,16 +10,26 @@ const { nextTick } = require("process")
 const gitUpload = require("./gitUpload")
 const unlinkAsync = promisify(fs.unlink)
 const cors = require("cors")
-const port = 5000
+const port = process.env.PORT || 5000
+const publicPath = path.join(__dirname, "../", "public")
 
 app.use(
   bodyParser.urlencoded({
     extended: true,
   }),
   cors({
-    origin: "http://localhost:8000",
-  })
+    origin: "http://localhost:5000",
+  }),
+  express.static(publicPath)
 )
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(publicPath, "404.html"))
+})
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -71,4 +81,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 })
 
-app.listen(port, () => console.log("server started on port 5000"))
+app.listen(port, () => {
+  console.log(`server started on port ${port}`)
+  console.log(publicPath)
+})
