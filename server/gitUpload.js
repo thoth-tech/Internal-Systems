@@ -8,8 +8,8 @@ const octokit = new Octokit({
 async function checkIfExist(fileName) {
   try {
     const result = await octokit.repos.getContent({
-      owner: "thoth-tech",
-      repo: "File-upload",
+      owner: "Rtam22",
+      repo: "Uploadtest",
       path: "uploads/" + fileName,
     })
     if (result.data.name) {
@@ -23,8 +23,8 @@ async function checkIfExist(fileName) {
 async function pushToGithub(content, fileName) {
   try {
     await octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", {
-      owner: "thoth-tech",
-      repo: "File-upload",
+      owner: "Rtam22",
+      repo: "Uploadtest",
       path: "uploads/" + fileName,
       message: "uploaded file",
       content: content,
