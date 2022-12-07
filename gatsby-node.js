@@ -12,7 +12,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   data.allMarkdownRemark.nodes.forEach(node => {
     const path = node.fileAbsolutePath.slice(
-      node.fileAbsolutePath.indexOf("docs")
+      node.fileAbsolutePath.indexOf("gatsby-source-git") + 18
     )
     actions.createPage({
       path,
