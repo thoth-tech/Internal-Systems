@@ -1,6 +1,12 @@
 import React, { Component } from "react"
 import Mark from "mark.js"
-import "./SearchDocument.css"
+import NavBar from "./NavBar"
+import { Box, Divider, InputBase, Paper, Typography } from "@mui/material"
+import SearchIcon from "@mui/icons-material/Search"
+import { IconButton } from "gatsby-theme-material-ui"
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import { Container } from "@mui/system"
 
 class SearchDocument extends Component {
   state = {
@@ -13,6 +19,19 @@ class SearchDocument extends Component {
 
   async componentDidMount() {
     this.state.instance = new Mark(document.querySelector("div.context"))
+    window.onkeydown = event => {
+      const key = event.key
+      switch (key.toUpperCase()) {
+        case "ARROWDOWN":
+          this.moveNext()
+          break
+        case "ARROWUP":
+          this.movePrevious()
+          break
+        default:
+          return
+      }
+    }
   }
 
   handleSubmit = e => {
@@ -30,6 +49,7 @@ class SearchDocument extends Component {
         const ids = []
 
         for (let i = 0; i < elements.length; i++) {
+          elements[i].style.backgroundColor = "yellow"
           elements[i].id = i
           ids.push(i)
         }
@@ -54,8 +74,8 @@ class SearchDocument extends Component {
     const currentElement = document.getElementById(idList[index + 1])
     const previousElement = document.getElementById(idList[index])
 
-    if (!!previousElement) previousElement.className = "highlight"
-    currentElement.className = "selected"
+    if (!!previousElement) previousElement.style.backgroundColor = "yellow"
+    currentElement.style.backgroundColor = "orange"
     window.scrollTo({ top: currentElement.offsetTop - 200, behavior: "smooth" })
     this.setState({
       index: this.state.index + 1,
@@ -69,8 +89,8 @@ class SearchDocument extends Component {
     const currentElement = document.getElementById(idList[index - 1])
     const previousElement = document.getElementById(idList[index])
 
-    if (!!previousElement) previousElement.className = "highlight"
-    currentElement.className = "selected"
+    if (!!previousElement) previousElement.style.backgroundColor = "yellow"
+    currentElement.style.backgroundColor = "orange"
     window.scrollTo({ top: currentElement.offsetTop - 200, behavior: "smooth" })
     this.setState({ index: index - 1 })
   }
@@ -79,25 +99,74 @@ class SearchDocument extends Component {
     const { index, queryResult } = this.state
     const htmlData = this.props.data.markdownRemark.html
 
+    const createDivider = () => {
+      return (
+        <Divider orientation="vertical" sx={{ borderColor: "gray" }} flexItem />
+      )
+    }
+
+    const createButton = (icon, func) => {
+      return (
+        <IconButton
+          type="button"
+          sx={{ p: "10px" }}
+          aria-label="search"
+          onClick={func}
+        >
+          {icon}
+        </IconButton>
+      )
+    }
+
     return (
-      <>
-        <div className={"search-bar"}>
-          <form onSubmit={this.handleSubmit}>
-            <br />
-            <label htmlFor="Search">Enter your search here</label>
-            <input
-              placeholder="Enter your search here"
+      <Container maxWidth="xl">
+        <NavBar />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            py: 7,
+            mr: 2,
+            position: "sticky",
+            top: 0,
+          }}
+        >
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: "40%",
+              minWidth: "300px",
+              maxWidth: "500px",
+            }}
+            onSubmit={this.handleSubmit}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              fullWidth
               onChange={this.getInput}
-              ref={ref => ref && ref.focus()}
+              inputRef={input => input && input.focus()}
             />
-            <button>Submit</button>
-          </form>
-          <button onClick={this.movePrevious}>-</button>
-          <button onClick={this.moveNext}>+</button>
-          <p>
-            Number of results: {index + 1} / {queryResult}
-          </p>
-        </div>
+            {createButton(<SearchIcon />, this.handleSubmit)}
+            {createDivider()}
+            {createButton(<ArrowUpwardIcon />, this.movePrevious)}
+            {createDivider()}
+            {createButton(<ArrowDownwardIcon />, this.moveNext)}
+            {createDivider()}
+            <Typography
+              color="text.secondary"
+              variant="body2"
+              sx={{ p: "10px" }}
+            >
+              {index + 1} / {queryResult}
+            </Typography>
+          </Paper>
+        </Box>
+
         <div className="context">
           <div
             dangerouslySetInnerHTML={{
@@ -105,7 +174,7 @@ class SearchDocument extends Component {
             }}
           ></div>
         </div>
-      </>
+      </Container>
     )
   }
 }

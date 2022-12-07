@@ -1,10 +1,25 @@
 import React, { Component } from "react"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import * as JsSearch from "js-search"
+import NavBar from "./NavBar"
+import {
+  Box,
+  InputBase,
+  List,
+  ListItem,
+  Paper,
+  Typography,
+} from "@mui/material"
+
+import SearchIcon from "@mui/icons-material/Search"
+import { IconButton } from "gatsby-theme-material-ui"
+import { Container } from "@mui/system"
+import HtmlTooltip from "./HtmlToolTip"
+import ScrollTop from "./ScrollTop"
 
 class Search extends Component {
   state = {
-    docList: [...this.props.data.allFile.nodes],
+    docList: [...this.props.data.allMarkdownRemark.nodes],
     search: {},
     searchResults: [],
     isLoading: true,
@@ -13,8 +28,12 @@ class Search extends Component {
 
   async componentDidMount() {
     this.state.docList.forEach(el => {
-      el.keywords = el.relativePath.replace(/(\/|-|.md)/g, " ")
-      el.title = el.relativePath.match(/[^\/]+(?=.md)/g) // eslint-disable-line
+      const path = el.fileAbsolutePath.slice(
+        el.fileAbsolutePath.indexOf("gatsby-source-git") + 18
+      )
+      el.path = path
+      el.keywords = path.replace(/(\/|-|.md)/g, " ")
+      el.title = path.match(/[^\/]+(?=.md)/g) // eslint-disable-line
     })
     this.rebuildIndex()
   }
@@ -55,30 +74,90 @@ class Search extends Component {
     }
 
     return (
-      <div>
-        <br />
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="Search">Enter your search here</label>
-          <input
-            value={queryValue}
-            onChange={this.searchData}
-            ref={ref => ref && ref.focus()}
-            placeholder="Enter your search here"
-          />
-        </form>
-        Number of results: {queryResults.length}
-        <hr />
-        {queryResults.map(item => {
-          return (
-            <div key={`row_${item.id}`}>
-              <Link to={`/${item.relativePath}`}>{item.title}</Link>
-              <br />
-              <label>{item.relativePath}</label>
-              <hr />
-            </div>
-          )
-        })}
-      </div>
+      <Container maxWidth="xl">
+        <NavBar />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: 5,
+          }}
+        >
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: "78%",
+            }}
+            onSubmit={this.handleSubmit}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              value={queryValue}
+              fullWidth
+              onChange={this.searchData}
+              inputRef={input => input && input.focus()}
+            />
+
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </Box>
+        <Container sx={{ width: "80%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Typography color="text.secondary" variant="body2">
+              Number of results: {queryResults.length}
+            </Typography>
+            <List component="nav" aria-label="mailbox folders">
+              {queryResults.map(item => {
+                return (
+                  <HtmlTooltip
+                    title={
+                      item.html ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: item.html,
+                          }}
+                        />
+                      ) : (
+                        <h5>No Preview</h5>
+                      )
+                    }
+                  >
+                    <ListItem
+                      button
+                      divider
+                      key={`row_${item.id}`}
+                      onClick={() => navigate(`/${item.path}`)}
+                      sx={{ pt: 3 }}
+                    >
+                      <Box sx={{ flexDirection: "column" }}>
+                        <Typography color="info.main" variant="subtitle1" d>
+                          {`${item.title}`.toUpperCase()}
+                        </Typography>
+                        <Typography color="text.secondary" variant="body2" d>
+                          {item.path}
+                        </Typography>
+                      </Box>
+                    </ListItem>
+                  </HtmlTooltip>
+                )
+              })}
+            </List>
+          </Box>
+        </Container>
+        <ScrollTop />
+      </Container>
     )
   }
 }

@@ -8,6 +8,7 @@ export default function SearchResults(props) {
   useEffect(() => {
     const state = props.location.state
     if (!!state) setInput(state.input)
+    // eslint-disable-next-line
   }, [])
 
   return <Search data={props.data} input={input} />
@@ -15,15 +16,11 @@ export default function SearchResults(props) {
 
 export const query = graphql`
   query SearchQueryHomepage {
-    allFile(
-      filter: {
-        sourceInstanceName: { ne: "placeholder" }
-        extension: { eq: "md" }
-      }
-    ) {
+    allMarkdownRemark {
       nodes {
-        relativePath
+        fileAbsolutePath
         id
+        html
       }
     }
   }

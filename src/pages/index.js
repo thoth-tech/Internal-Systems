@@ -1,42 +1,76 @@
-// import { Box } from "@mui/material"
 import React from "react"
-import "./index.css"
-import Button from "react-bootstrap/Button"
-import { StaticImage } from "gatsby-plugin-image"
-import Container from "react-bootstrap/Container"
-import "bootstrap/dist/css/bootstrap.min.css"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
 import NavBar from "../Components/NavBar"
 import Footer from "../Components/Footer"
-import UploadDocument from "../Components/UploadDocument"
+import { Grid, Paper, Typography } from "@mui/material"
+import Button from "react-bootstrap/Button"
+import { Container, Stack } from "@mui/system"
+import BGImage from "../assets/bg-image.png"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks"
 
 function Home() {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <NavBar />
-      <div className="test">
-        <Row className="row">
-          <Col className="col">
-            <div className="block1">
-              <h1 className="heading">Thoth Tech</h1>
-              <br></br>
-              <p className="para">One stop for all projects</p>
-              <Button href="/docs" className="btn" variant="outline-dark">
-                Explore Now
+      <Paper
+        sx={{
+          backgroundImage: `url(${BGImage})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          minHeight: "90vh",
+        }}
+      >
+        <Grid
+          container
+          display="flex"
+          spacing={2}
+          alignItems="center"
+          textAlign="center"
+          justifyContent="center"
+          sx={{ pt: "20vmin" }}
+        >
+          <Grid item xs={12}>
+            <Typography variant="h2" gutterBottom sx={{ fontWeight: 500 }}>
+              Thoth Tech
+            </Typography>
+          </Grid>
+          <Grid item xs={9} sm={5}>
+            <Typography variant="body1" gutterBottom>
+              Thoth Tech is founded on February 21st, 2022. Our mission is to
+              build, operate and deploy world class education technologies. We
+              are proud to create tools that enhance education outcomes by
+              empowering students, connecting them with tutors and facilitating
+              personalised learning experiences.
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Button
+                href="https://github.com/thoth-tech"
+                className="btn"
+                variant="dark"
+              >
+                <Stack direction="row" spacing={1}>
+                  <GitHubIcon />
+                  <div>GitHub</div>
+                </Stack>
               </Button>
-              <UploadDocument />
-            </div>
-          </Col>
-          <Col className="col">
-            <StaticImage
-              width={450}
-              src={"../assets/capstone.png"}
-              alt="capstone"
-            />
-          </Col>
-        </Row>
-      </div>
+              <Button href="/docs" className="btn" variant="outline-dark">
+                <Stack direction="row" spacing={1}>
+                  <LibraryBooksIcon />
+                  <div>Handbook</div>
+                </Stack>
+              </Button>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Paper>
       <Footer />
     </Container>
   )
