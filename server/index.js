@@ -55,27 +55,25 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (req.file) {
       const file = fs.readFileSync("uploads/" + req.file.filename).toString()
-      console.log(file)
       const content = Buffer.from(file, "binary").toString("base64")
-      console.log(content)
       const fileName = req.file.originalname
       const fileCheck = await gitUpload.checkIfExist(fileName)
 
       if (fileCheck) {
-        res.status(422).json({ message: "File name already exists" })
+        res.send(JSON.stringify("File name already exists"))
       } else {
         await gitUpload.pushToGithub(content, fileName)
         const fileCheck = await gitUpload.checkIfExist(fileName)
         if (fileCheck) {
           console.log("File successfully uploaded")
-          res.status(200).json({ message: "File successfully uploaded" })
+          res.send(JSON.stringify("File successfully uploaded"))
         } else {
-          res.status(500).json({ message: "Error uploading file" })
+          res.send(JSON.stringify("Error uploading file"))
         }
       }
       unlinkAsync(req.file.path)
     } else {
-      res.status(500).json({ message: "No file added" })
+      res.send(JSON.stringify("Please choose a file.."))
     }
   } catch (err) {
     console.log(err)

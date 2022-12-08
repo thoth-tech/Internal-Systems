@@ -3,6 +3,7 @@ import axios from "axios"
 
 function UploadDocument() {
   const [file, setFile] = useState()
+  const [resultUpload, setResultUpload] = useState()
 
   const send = () => {
     console.log(file)
@@ -11,9 +12,13 @@ function UploadDocument() {
     console.log(data)
     axios
       .post("/upload", data)
-      .then(res => console.log(res))
+      .then(result => {
+        setResultUpload(result.data)
+        console.log(JSON.stringify(resultUpload))
+      })
       .catch(err => {
-        console.log(err.response.data.message)
+        setResultUpload(err.response.data.message)
+        console.log(JSON.stringify(resultUpload))
       })
   }
 
@@ -34,6 +39,7 @@ function UploadDocument() {
       <button type="button" onClick={send}>
         Upload
       </button>
+      <div>{resultUpload}</div>
     </form>
   )
 }
