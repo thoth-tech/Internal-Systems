@@ -18,7 +18,7 @@ app.use(
     extended: true,
   }),
   cors({
-    origin: "http://localhost:5000",
+    origin: "http://localhost:8000",
   }),
   express.static(publicPath)
 )
@@ -54,8 +54,10 @@ const upload = multer({
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (req.file) {
-      const file = fs.readFileSync("uploads\\/" + req.file.filename).toString()
-      const content = btoa(unescape(encodeURIComponent(file)))
+      const file = fs.readFileSync("uploads/" + req.file.filename).toString()
+      console.log(file)
+      const content = Buffer.from(file, "binary").toString("base64")
+      console.log(content)
       const fileName = req.file.originalname
       const fileCheck = await gitUpload.checkIfExist(fileName)
 
