@@ -24,6 +24,7 @@ function UploadDocument() {
 
   return (
     <form action="#" encType="multipart/form-data">
+      <div>{resultUpload}</div>
       <div>
         <label htmlFor="fileUpload">File</label>
         <input
@@ -39,7 +40,6 @@ function UploadDocument() {
       <button type="button" onClick={send}>
         Upload
       </button>
-      <div>{resultUpload}</div>
     </form>
   )
 }
