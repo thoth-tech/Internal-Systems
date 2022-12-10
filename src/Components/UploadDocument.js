@@ -3,6 +3,7 @@ import axios from "axios"
 
 function UploadDocument() {
   const [file, setFile] = useState()
+  const [resultUpload, setResultUpload] = useState()
 
   const send = () => {
     console.log(file)
@@ -10,25 +11,35 @@ function UploadDocument() {
     data.append("file", file)
     console.log(data)
     axios
-      .post("http://localhost:5000/upload", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .post("/upload", data)
+      .then(result => {
+        setResultUpload(result.data)
+        console.log(JSON.stringify(resultUpload))
+      })
+      .catch(err => {
+        setResultUpload(err.response.data.message)
+        console.log(JSON.stringify(resultUpload))
+      })
   }
 
   return (
-    <form action="#" enctype="multipart/form-data">
+    <form action="#" encType="multipart/form-data">
+      <div>{resultUpload}</div>
       <div>
         <label htmlFor="fileUpload">File</label>
         <input
           type="file"
           id="file"
+          accept=".md"
           onChange={event => {
             const file = event.target.files[0]
             setFile(file)
           }}
         />
       </div>
-      <button onClick={send}>Upload</button>
+      <button type="button" onClick={send}>
+        Upload
+      </button>
     </form>
   )
 }
