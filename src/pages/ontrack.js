@@ -16,8 +16,8 @@ function Home() {
       <NavBar />
       <Col className="on-img"><StaticImage
       className="ontrack-img"
-            width={300}
-            height={300}
+              width={250}
+                height={250}
             src={"../assets/doubtfire.png"}
             alt="capstone"
           />
@@ -47,17 +47,13 @@ function Home() {
 
               <h1>Understanding OnTrack</h1>
             <Col className="on-img"><StaticImage
-            className="ontrack-img"
-            width={500}
-            height={500}
+            className="page-img"
             src={"../assets/architecture.png"}
             alt="capstone"
           />
           </Col>
           <Col className="on-img"><StaticImage
-            className="ontrack-img"
-            width={500}
-            height={500}
+            className="page-img"
             src={"../assets/dataflow.png"}
             alt="capstone"
           />
