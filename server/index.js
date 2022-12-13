@@ -31,6 +31,22 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, "404.html"))
 })
 
+app.get("/product", (req, res) => {
+  res.sendFile(path.join(publicPath, "product.js"))
+})
+
+app.get("/ontrack", (req, res) => {
+  res.sendFile(path.join(publicPath, "ontrack.js"))
+})
+
+app.get("/splashkit", (req, res) => {
+  res.sendFile(path.join(publicPath, "splashkit.js"))
+})
+
+app.get("/dreambig", (req, res) => {
+  res.sendFile(path.join(publicPath, "dreambig.js"))
+})
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads")
