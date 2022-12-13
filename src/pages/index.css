@@ -20,7 +20,7 @@
 }
 
 .test {
-  margin-top: 10%;
+  margin: 00% 0% 20%;
 }
 
 .heading {
@@ -75,6 +75,35 @@
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
 }
+
+.page-img{
+  width: 500px;
+  height: 100%;
+}
+
+.on-heading{
+  text-align: center;
+  font-size: 55px;
+}
+
+.on-img{
+  text-align: center;
+  margin: 70px 0px 0px;
+}
+
+.block1 h1 {
+  font-size: 35px;
+}
+
+.block1 p,li{
+  font-size: 20px;
+}
+
+.on-btn{
+  font-size: 40px;
+  text-align: center;
+}
+
 
 @media only screen and (min-width: 510px) {
 }
