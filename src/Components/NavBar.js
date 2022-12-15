@@ -109,13 +109,6 @@ const NavBar = () => {
           </Nav.Link>
           <Nav.Link
             className="navlink"
-            href="#getstarted"
-            variant="outline-dark"
-          >
-            Get Started
-          </Nav.Link>
-          <Nav.Link
-            className="navlink"
             variant="outline-dark"
             href="/contributors"
           >
@@ -123,6 +116,9 @@ const NavBar = () => {
           </Nav.Link>
           <Nav.Link className="navlink" variant="outline-dark" href="/upload">
             Upload
+          </Nav.Link>
+          <Nav.Link className="navlink" variant="outline-dark" href="/contact">
+            Contact
           </Nav.Link>
         </Nav>
         {searchContent}
