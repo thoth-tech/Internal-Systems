@@ -71,6 +71,22 @@ function Home() {
            </Col>
             
         </Row>
+        <Row className="row">
+          <Col className="col">
+            <div className="block1">
+              <a href ="/companyops"><h2 className="heading">Company-Operation</h2></a>
+              <br></br>
+            </div>
+          </Col>
+          <Col>
+            <StaticImage
+              width={220}
+              src={"../assets/company-operation-background.png"}
+              alt="companyoperation"
+            />
+           </Col>
+            
+        </Row>
 
         <Row className="row">
           <Col className="col">

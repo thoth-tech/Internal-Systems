@@ -15,7 +15,7 @@ function Home() {
     <Container>
       <NavBar />
       <div className="test">
-        <h1 className="heading">Dreambig</h1>
+        <h1 className="heading">Company Operation</h1>
         <br></br>
         <br></br>
 
@@ -23,22 +23,22 @@ function Home() {
           <Col className="col">
             <div className="block1">
               <p>
-                DreamBig aims to provide a personalised roadmap integrated with
-                Ontrack to support students to develop and improve their
-                employability after graduation. In addition, it will provide a
-                platform to help set realistic expectations for students
-                graduating into the real world. DreamBig will be an integrated
-                platform with Ontrack which helps contributing to student
-                employability. This is important to Thoth Tech as we believe in
-                providing educational resources for students.
+                Company operation is a project which provides students a website
+                that will include all the information for all the capstone
+                projects. It is indeed designed to serve as a primary hub where
+                students can find all their information in one place. Hence, we
+                require a website that is well-designed and easy to use with
+                responsive design, helpful navigation and high-quality content
+                and security features. Also, it should reflect our company, its
+                products, services, and, eventually, its identity.
               </p>
             </div>
           </Col>
           <Col>
             <StaticImage
               width={220}
-              src={"../assets/qwert.png"}
-              alt="capstone"
+              src={"../assets/company-operation-background.png"}
+              alt="company-operation"
             />
           </Col>
         </Row>
@@ -47,7 +47,7 @@ function Home() {
           <Col className="col">
             <p className="para">One stop for all projects</p>
             <Button
-              href="https://github.com/thoth-tech"
+              href="https://github.com/thoth-tech/Internal-Systems"
               className="btn"
               variant="outline-dark"
             >
