@@ -4,22 +4,48 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const app = express()
 const fs = require("fs")
-const base64 = require("base-64")
-const { Octokit } = require("@octokit/rest")
-require("dotenv").config()
 const { promisify } = require("util")
+const { response } = require("express")
+const { nextTick } = require("process")
+const gitUpload = require("./gitUpload")
 const unlinkAsync = promisify(fs.unlink)
-const token = process.env.TOKEN
-const octokit = new Octokit({
-  auth: token,
-})
+const cors = require("cors")
+const port = process.env.PORT || 5000
+const publicPath = path.join(__dirname, "../", "public")
 
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  })
+  }),
+  cors({
+    origin: "http://localhost:8000",
+  }),
+  express.static(publicPath)
 )
-const port = 5000
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(publicPath, "404.html"))
+})
+
+app.get("/product", (req, res) => {
+  res.sendFile(path.join(publicPath, "product.js"))
+})
+
+app.get("/ontrack", (req, res) => {
+  res.sendFile(path.join(publicPath, "ontrack.js"))
+})
+
+app.get("/splashkit", (req, res) => {
+  res.sendFile(path.join(publicPath, "splashkit.js"))
+})
+
+app.get("/dreambig", (req, res) => {
+  res.sendFile(path.join(publicPath, "dreambig.js"))
+})
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -42,23 +68,36 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  const testFile = fs.readFileSync("uploads\\/" + req.file.filename).toString()
-  const content = base64.encode(testFile)
-  const fileName = req.file.originalname
-
   try {
-    await octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", {
-      owner: "YOUR_ACCOUNT_NAME",
-      repo: "YOUR_REPOSITORY",
-      path: "server/uploads/" + fileName,
-      message: "uploaded file",
-      content: content,
-    })
+    if (req.file) {
+      const file = fs.readFileSync("uploads/" + req.file.filename).toString()
+      const content = Buffer.from(file, "binary").toString("base64")
+      const fileName = req.file.originalname
+      const fileCheck = await gitUpload.checkIfExist(fileName)
+
+      if (fileCheck) {
+        res.send(JSON.stringify("File name already exists"))
+      } else {
+        await gitUpload.pushToGithub(content, fileName)
+        const fileCheck = await gitUpload.checkIfExist(fileName)
+        if (fileCheck) {
+          console.log("File successfully uploaded")
+          res.send(JSON.stringify("File successfully uploaded"))
+        } else {
+          res.send(JSON.stringify("Error uploading file"))
+        }
+      }
+      unlinkAsync(req.file.path)
+    } else {
+      res.send(JSON.stringify("Please choose a file.."))
+    }
   } catch (err) {
     console.log(err)
+    unlinkAsync(req.file.path)
   }
-
-  await unlinkAsync(req.file.path)
 })
 
-app.listen(port, () => console.log("server started on port 5000"))
+app.listen(port, () => {
+  console.log(`server started on port ${port}`)
+  console.log(publicPath)
+})
