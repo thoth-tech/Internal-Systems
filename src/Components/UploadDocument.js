@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { ClassNames } from "@emotion/react"
 
 function UploadDocument() {
   const [file, setFile] = useState()
@@ -23,24 +24,36 @@ function UploadDocument() {
   }
 
   return (
-    <form action="#" encType="multipart/form-data">
-      <div>{resultUpload}</div>
-      <div>
-        <label htmlFor="fileUpload">File</label>
-        <input
-          type="file"
-          id="file"
-          accept=".md"
-          onChange={event => {
-            const file = event.target.files[0]
-            setFile(file)
-          }}
-        />
-      </div>
-      <button type="button" onClick={send}>
-        Upload
-      </button>
-    </form>
+
+    < div ClassName="upload-wrapper">
+      <header className="btn-fl">File Uploader</header>
+      <form action="#" encType="multipart/form-data">
+        <div>{resultUpload}</div>
+        <div>
+          <label htmlFor="fileUpload">File</label>
+          <input
+            type="file"
+            id="file"
+            accept=".md"
+            onChange={event => {
+              const file = event.target.files[0]
+              setFile(file)
+            }}
+          />
+        </div>
+   
+        <button type="button" onClick={send}>
+          Upload
+        </button>
+      </form>
+     
+
+
+
+    </div>
+
+
+
   )
 }
 
