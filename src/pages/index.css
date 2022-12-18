@@ -19,8 +19,15 @@
   margin: 10%;
 }
 
-.test {
+/* .test {
   margin: 00% 0% 20%;
+  display: flex;
+} */
+
+.test1 {
+  margin: 00% 0% 20%;
+  display: flex;
+  flex-direction: row;
 }
 
 .heading {
@@ -28,6 +35,13 @@
   padding: 35px;
   text-shadow: rgba(0, 0, 0, 0.25) 0 4px 12px;
   border-bottom: rgba(0, 0, 0, 1) 0 4px 12px;
+  text-align: center;
+  color: black !important;
+}
+a:link {
+  text-decoration: none;
+  
+  
 }
 
 .docs {
@@ -94,6 +108,7 @@
 
 .block1 h1 {
   font-size: 35px;
+  
 }
 
 .block1 p,li{
@@ -276,5 +291,14 @@ section .details span{
   align-items: center;
   margin-bottom: 7px;
   justify-content: space-between;
+}
+
+.p-img{
+
+}
+.p-img:hover{
+  transform: scale(1.2);
+  transition: 0.3s;
+  
 }
 
